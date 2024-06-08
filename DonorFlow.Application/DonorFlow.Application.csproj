@@ -7,10 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="Models\" />
-    <Folder Include="Validators\" />
-    <Folder Include="Queries\" />
+    <PackageReference Include="FluentValidation" Version="11.9.1" />
+    <PackageReference Include="MediatR" Version="11.1.0" />
+    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DonorFlow.Core\DonorFlow.Core.csproj" />
+    <ProjectReference Include="..\DonorFlow.Infrastructure\DonorFlow.Infrastructure.csproj" />
+    <ProjectReference Include="..\DonorFlow.Utilities\DonorFlow.Utilities.csproj" />
   </ItemGroup>
 
 </Project>
