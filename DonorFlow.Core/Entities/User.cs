@@ -34,14 +34,16 @@ namespace DonorFlow.Core.Entities
                 Role = UserRole.Basic;
         }
 
-        public void Update(string fullName, string cpf, string password, string email, UserRole role, LocationInfo location)
+        public void Update(string fullName, string cpf, string email, string password, DateTime birthDate, Gender gender, UserRole role, LocationInfo location)
         {
-            FullName = fullName;
             CPF = NormalizeCPF(cpf);
-            Password = HashPassword(password);
             Email = email;
+            Password = password;
+
             Role = role;
             Location = location;
+
+            UpdatePerson(fullName, email, birthDate, gender);
         }
 
         public void SetLocation(LocationInfo location)

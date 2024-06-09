@@ -1,13 +1,10 @@
-﻿using DonorFlow.Core.Entities;
-using DonorFlow.Core.Services.AuthService;
-using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Tokens;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Text;
+﻿using System.Text;
 using System.Security.Claims;
+using DonorFlow.Core.Entities;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.Extensions.Configuration;
+using DonorFlow.Core.Services.AuthService;
 
 namespace DonorFlow.Infrastructure.Services
 {

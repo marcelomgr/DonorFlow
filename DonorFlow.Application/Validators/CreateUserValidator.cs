@@ -1,12 +1,7 @@
-﻿using DonorFlow.Application.Commands.CreateUser;
-using DonorFlow.Core.Enums;
+﻿using FluentValidation;
 using DonorFlow.Utilities;
-using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DonorFlow.Core.Enums;
+using DonorFlow.Application.Commands.CreateUser;
 
 namespace DonorFlow.Application.Validators
 {

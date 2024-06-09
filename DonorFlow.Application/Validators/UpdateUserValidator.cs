@@ -1,11 +1,7 @@
-﻿using DonorFlow.Application.Commands.UpdateUser;
+﻿using FluentValidation;
+using DonorFlow.Utilities;
 using DonorFlow.Core.Enums;
-using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DonorFlow.Application.Commands.UpdateUser;
 
 namespace DonorFlow.Application.Validators
 {
@@ -13,7 +9,7 @@ namespace DonorFlow.Application.Validators
     {
         public UpdateUserValidator()
         {
-            RuleFor(x => x.Name)
+            RuleFor(x => x.FullName)
                 .NotEmpty()
                 .MinimumLength(2);
 
@@ -25,10 +21,33 @@ namespace DonorFlow.Application.Validators
                 .NotEmpty()
                 .MinimumLength(8);
 
+            RuleFor(x => x.CPF)
+                .NotEmpty()
+                .Custom((cpf, context) =>
+                {
+                    if (!Utils.IsCpfValid(cpf))
+                    {
+                        context.AddFailure("CPF", "CPF inválido.");
+                    }
+                });
+
             RuleFor(x => x.Role)
                 .NotEmpty()
                 .Must(role => Enum.TryParse<UserRole>(role, out _))
-                .WithMessage("Role inválida");
+                .WithMessage("Role inválida.");
+
+            RuleFor(x => x.BirthDate)
+            .NotEmpty()
+            .Must(BeAnAdult)
+            .WithMessage("Usuário deve ser maior de idade.");
+        }
+
+        private bool BeAnAdult(DateTime birthDate)
+        {
+            var today = DateTime.Today;
+            var age = today.Year - birthDate.Year;
+            if (birthDate.Date > today.AddYears(-age)) age--;
+            return age >= 18;
         }
     }
 }

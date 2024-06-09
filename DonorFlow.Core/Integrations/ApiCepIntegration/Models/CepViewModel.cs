@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DonorFlow.Core.Integrations.ApiCepIntegration.Models
+﻿namespace DonorFlow.Core.Integrations.ApiCepIntegration.Models
 {
     public class CepViewModel
     {

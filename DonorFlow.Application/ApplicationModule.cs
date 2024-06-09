@@ -1,9 +1,9 @@
-﻿using DonorFlow.Application.Commands.CreateDonor;
+﻿using MediatR;
+using FluentValidation;
+using DonorFlow.Application.Validators;
 using DonorFlow.Application.Commands.CreateUser;
 using DonorFlow.Application.Commands.UpdateUser;
-using DonorFlow.Application.Validators;
-using FluentValidation;
-using MediatR;
+using DonorFlow.Application.Commands.CreateDonor;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DonorFlow.Application

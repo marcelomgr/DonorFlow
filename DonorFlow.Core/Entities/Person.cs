@@ -1,9 +1,4 @@
 ﻿using DonorFlow.Core.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DonorFlow.Core.Entities
 {
@@ -15,6 +10,14 @@ namespace DonorFlow.Core.Entities
         public Gender Gender { get; private set; }
 
         protected Person(string fullName, string email, DateTime birthDate, Gender gender)
+        {
+            FullName = fullName;
+            Email = email;
+            BirthDate = birthDate;
+            Gender = gender;
+        }
+
+        protected void UpdatePerson(string fullName, string email, DateTime birthDate, Gender gender)
         {
             FullName = fullName;
             Email = email;

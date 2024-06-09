@@ -59,10 +59,12 @@ namespace DonorFlow.Application.Commands.UpdateUser
             }
 
             user.Update(
-                request.Name,
+                request.FullName,
                 request.CPF,
-                user.Password,
                 request.Email,
+                user.Password,
+                request.BirthDate,
+                Enum.Parse<Gender>(request.Gender.ToString()),
                 Enum.Parse<UserRole>(request.Role.ToString()),
                 user.Location);
 

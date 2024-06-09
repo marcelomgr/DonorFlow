@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using DonorFlow.Application.Models;
 using DonorFlow.Core.Enums;
 using DonorFlow.Core.Entities;
+using DonorFlow.Application.Models;
 
 namespace DonorFlow.Application.Commands.CreateUser
 {
