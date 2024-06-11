@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using DonorFlow.Core.Repositories;
 using DonorFlow.Application.Models;
+using DonorFlow.Application.Queries.Models;
 
 namespace DonorFlow.Application.Queries.GetUserByEmail
 {
-    public class GetUserByEmailQueryHandler : IRequestHandler<GetUserByEmailQuery, BaseResult<GetUserByEmailViewModel>>
+    public class GetUserByEmailQueryHandler : IRequestHandler<GetUserByEmailQuery, BaseResult<GetUsersViewModel>>
     {
         private readonly IUserRepository _repository;
         public GetUserByEmailQueryHandler(IUserRepository repository)
@@ -12,18 +13,18 @@ namespace DonorFlow.Application.Queries.GetUserByEmail
             _repository = repository;
         }
 
-        public async Task<BaseResult<GetUserByEmailViewModel>> Handle(GetUserByEmailQuery request, CancellationToken cancellationToken)
+        public async Task<BaseResult<GetUsersViewModel>> Handle(GetUserByEmailQuery request, CancellationToken cancellationToken)
         {
             var user = await _repository.GetByEmailAsync(request.Email);
 
             if (user is null)
             {
-                return new BaseResult<GetUserByEmailViewModel>(null, false, string.Empty);
+                return new BaseResult<GetUsersViewModel>(null, false, string.Empty);
             }
 
-            var viewModel = new GetUserByEmailViewModel(user);
+            var viewModel = new GetUsersViewModel(user);
 
-            return new BaseResult<GetUserByEmailViewModel>(viewModel);
+            return new BaseResult<GetUsersViewModel>(viewModel);
         }
     }
 }

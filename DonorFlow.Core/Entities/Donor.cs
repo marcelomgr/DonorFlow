@@ -23,5 +23,16 @@ namespace DonorFlow.Core.Entities
         {
             Location = location;
         }
+
+        public void Update(string fullName, string email, DateTime birthDate, Gender gender, double weight, BloodType bloodType, RhFactor rhFactor, LocationInfo location)
+        {
+            Weight = weight;
+            BloodType = bloodType;
+            RhFactor = rhFactor;
+
+            Location = location;
+
+            UpdatePerson(fullName, email, birthDate, gender);
+        }
     }
 }

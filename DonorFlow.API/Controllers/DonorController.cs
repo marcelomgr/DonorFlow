@@ -1,30 +1,28 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using DonorFlow.Application.Commands.AuthUser;
-using DonorFlow.Application.Commands.CreateUser;
-using DonorFlow.Application.Commands.DeleteUser;
-using DonorFlow.Application.Commands.UpdateUser;
-using DonorFlow.Application.Queries.GetUserById;
-using DonorFlow.Application.Queries.GetUsersAll;
-using DonorFlow.Application.Queries.GetUserByEmail;
+using DonorFlow.Application.Commands.CreateDonor;
+using DonorFlow.Application.Commands.DeleteDonor;
+using DonorFlow.Application.Commands.UpdateDonor;
+using DonorFlow.Application.Queries.GetDonorById;
+using DonorFlow.Application.Queries.GetDonorsAll;
 
 namespace DonorFlow.API.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("api/users")]
-    public class UsersController : ControllerBase
+    [Route("api/donors")]
+    public class DonorController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public UsersController(IMediator mediator)
+        public DonorController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Post(CreateUserCommand command)
+        public async Task<IActionResult> Post(CreateDonorCommand command)
         {
             var result = await _mediator.Send(command);
 
@@ -34,7 +32,7 @@ namespace DonorFlow.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var query = new GetAllUsersQuery();
+            var query = new GetAllDonorsQuery();
             var result = await _mediator.Send(query);
 
             return result.Success ? Ok(result) : NotFound(result.Message);
@@ -43,34 +41,16 @@ namespace DonorFlow.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
-            var query = new GetUserByIdQuery(id);
-            var result = await _mediator.Send(query);
-
-            return result.Success ? Ok(result) : NotFound(result.Message);
-        }
-
-        [HttpGet("email/{email}")]
-        public async Task<IActionResult> GetByEmail(string email)
-        {
-            var query = new GetUserByEmailQuery(email);
+            var query = new GetDonorByIdQuery(id);
             var result = await _mediator.Send(query);
 
             return result.Success ? Ok(result) : NotFound(result.Message);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(Guid id, UpdateUserCommand command)
+        public async Task<IActionResult> Put(Guid id, UpdateDonorCommand command)
         {
             command.Id = id;
-            var result = await _mediator.Send(command);
-
-            return result.Success ? Ok(result) : BadRequest(result.Message);
-        }
-
-        [HttpPost("auth")]
-        [AllowAnonymous]
-        public async Task<IActionResult> Auth([FromBody] AuthUserCommand command)
-        {
             var result = await _mediator.Send(command);
 
             return result.Success ? Ok(result) : BadRequest(result.Message);
@@ -79,7 +59,7 @@ namespace DonorFlow.API.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            var command = new DeleteUserCommand(id);
+            var command = new DeleteDonorCommand(id);
             var result = await _mediator.Send(command);
 
             return result.Success ? Ok(result) : BadRequest(result.Message);

@@ -1,12 +1,12 @@
 ﻿using DonorFlow.Core.Enums;
 using DonorFlow.Core.Entities;
-using DonorFlow.Application.Commands.UpdateUser;
+using DonorFlow.Application.Models;
 
-namespace DonorFlow.Application.Queries.GetUserByEmail
+namespace DonorFlow.Application.Queries.Models
 {
-    public class GetUserByEmailViewModel
+    public class GetUsersViewModel
     {
-        public GetUserByEmailViewModel(User user)
+        public GetUsersViewModel(User user)
         {
             Id = user.Id;
             FullName = user.FullName;

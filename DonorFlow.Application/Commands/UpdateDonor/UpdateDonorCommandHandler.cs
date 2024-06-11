@@ -6,22 +6,22 @@ using DonorFlow.Core.ValueObjects;
 using DonorFlow.Application.Models;
 using DonorFlow.Core.Integrations.ApiCepIntegration;
 
-namespace DonorFlow.Application.Commands.UpdateUser
+namespace DonorFlow.Application.Commands.UpdateDonor
 {
-    public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, BaseResult>
+    public class UpdateDonorCommandHandler : IRequestHandler<UpdateDonorCommand, BaseResult>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IValidator<UpdateUserCommand> _validator;
+        private readonly IValidator<UpdateDonorCommand> _validator;
         private readonly IApiCepService _apiCepService;
 
-        public UpdateUserCommandHandler(IUnitOfWork unitOfWork, IValidator<UpdateUserCommand> validator, IApiCepService apiCepService)
+        public UpdateDonorCommandHandler(IUnitOfWork unitOfWork, IValidator<UpdateDonorCommand> validator, IApiCepService apiCepService)
         {
             _unitOfWork = unitOfWork;
             _validator = validator;
             _apiCepService = apiCepService;
         }
 
-        public async Task<BaseResult> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResult> Handle(UpdateDonorCommand request, CancellationToken cancellationToken)
         {
             var validationResult = await _validator.ValidateAsync(request, cancellationToken);
 
@@ -31,20 +31,20 @@ namespace DonorFlow.Application.Commands.UpdateUser
                 return new BaseResult<Guid>(Guid.Empty, false, errorMessages);
             }
 
-            var user = await _unitOfWork.Users.GetByIdAsync(request.Id);
+            var donor = await _unitOfWork.Donors.GetByIdAsync(request.Id);
 
-            if (user is null)
-                return new BaseResult<Guid>(Guid.Empty, false, "Usuário não encontrado.");
+            if (donor is null)
+                return new BaseResult<Guid>(Guid.Empty, false, "Doador não encontrado.");
 
-            if (user.Email != request.Email)
+            if (donor.Email != request.Email)
             {
-                var existingUser = await _unitOfWork.Users.GetByEmailAsync(request.Email);
+                var existingDonor = await _unitOfWork.Donors.GetByEmailAsync(request.Email);
 
-                if (existingUser is not null)
+                if (existingDonor is not null)
                     return new BaseResult<Guid>(Guid.Empty, false, "Email já cadastrado.");
             }
 
-            if (user.Location?.Cep != request.CEP)
+            if (donor.Location?.Cep != request.CEP)
             {
                 var resultCep = await _apiCepService.GetByCep(request.CEP);
 
@@ -52,20 +52,20 @@ namespace DonorFlow.Application.Commands.UpdateUser
                     return new BaseResult<Guid>(Guid.Empty, false, "CEP não encontrado.");
 
                 var location = new LocationInfo(resultCep.Cep, resultCep.Logradouro, resultCep.Bairro, resultCep.Localidade, resultCep.UF);
-                user.SetLocation(location);
+                donor.SetLocation(location);
             }
 
-            user.Update(
+            donor.Update(
                 request.FullName,
-                request.CPF,
                 request.Email,
-                user.Password,
                 request.BirthDate,
                 Enum.Parse<Gender>(request.Gender.ToString()),
-                Enum.Parse<UserRole>(request.Role.ToString()),
-                user.Location);
+                request.Weight,
+                request.BloodType,
+                Enum.Parse<RhFactor>(request.RhFactor.ToString()),
+                donor.Location);
 
-            await _unitOfWork.Users.UpdateAsync(user);
+            await _unitOfWork.Donors.UpdateAsync(donor);
             await _unitOfWork.SaveChangesAsync(cancellationToken);
 
             return new BaseResult();

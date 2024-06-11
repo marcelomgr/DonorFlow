@@ -2,11 +2,11 @@
 using DonorFlow.Application.Models;
 using DonorFlow.Application.Queries.Models;
 
-namespace DonorFlow.Application.Queries.GetUserById
+namespace DonorFlow.Application.Queries.GetDonorById
 {
-    public class GetUserByIdQuery : IRequest<BaseResult<GetUsersViewModel>>
+    public class GetDonorByIdQuery : IRequest<BaseResult<GetDonorsViewModel>>
     {
-        public GetUserByIdQuery(Guid id)
+        public GetDonorByIdQuery(Guid id)
         {
             Id = id;
         }

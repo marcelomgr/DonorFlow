@@ -1,6 +1,6 @@
 ﻿using DonorFlow.Core.ValueObjects;
 
-namespace DonorFlow.Application.Commands.UpdateUser
+namespace DonorFlow.Application.Models
 {
     public class LocationInfoModel
     {

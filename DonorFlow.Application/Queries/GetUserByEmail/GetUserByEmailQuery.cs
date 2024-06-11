@@ -1,9 +1,10 @@
 ﻿using MediatR;
 using DonorFlow.Application.Models;
+using DonorFlow.Application.Queries.Models;
 
 namespace DonorFlow.Application.Queries.GetUserByEmail
 {
-    public class GetUserByEmailQuery : IRequest<BaseResult<GetUserByEmailViewModel>>
+    public class GetUserByEmailQuery : IRequest<BaseResult<GetUsersViewModel>>
     {
         public GetUserByEmailQuery(string email)
         {
