@@ -8,6 +8,8 @@ using DonorFlow.Application.Commands.UserCommands.UpdateUser;
 using DonorFlow.Application.Commands.UserCommands.CreateUser;
 using DonorFlow.Application.Commands.UserCommands.DeleteUser;
 using DonorFlow.Application.Queries.UserQueries.GetUserByEmail;
+using DonorFlow.Application.Commands.UserCommands.ResetPasswordUser;
+using DonorFlow.Application.Commands.UserCommands.ForgotPasswordUser;
 
 namespace DonorFlow.API.Controllers
 {
@@ -80,6 +82,24 @@ namespace DonorFlow.API.Controllers
         public async Task<IActionResult> Delete(Guid id)
         {
             var command = new DeleteUserCommand(id);
+            var result = await _mediator.Send(command);
+
+            return result.Success ? Ok(result) : BadRequest(result.Message);
+        }
+
+        [HttpPost("reset")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword([FromBody] ResetPasswordUserCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            return result.Success ? Ok(result) : BadRequest(result.Message);
+        }
+
+        [HttpPost("forgot")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ForgotPassword([FromBody] ForgotPasswordUserCommand command)
+        {
             var result = await _mediator.Send(command);
 
             return result.Success ? Ok(result) : BadRequest(result.Message);

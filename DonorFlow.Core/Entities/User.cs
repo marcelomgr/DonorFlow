@@ -47,9 +47,9 @@ namespace DonorFlow.Core.Entities
             Location = location;
         }
 
-        public void SetPassword()
+        public void ResetPassword(string password)
         {
-            Password = HashPassword(Password);
+            Password = HashPassword(password);
         }
 
         public static string NormalizeCPF(string cpf)
