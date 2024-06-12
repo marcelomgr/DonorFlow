@@ -1,13 +1,13 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using DonorFlow.Application.Queries.GetUserById;
-using DonorFlow.Application.Queries.GetUsersAll;
-using DonorFlow.Application.Queries.GetUserByEmail;
-using DonorFlow.Application.Commands.User.AuthUser;
-using DonorFlow.Application.Commands.User.UpdateUser;
-using DonorFlow.Application.Commands.User.CreateUser;
-using DonorFlow.Application.Commands.User.DeleteUser;
+using DonorFlow.Application.Commands.UserCommands.AuthUser;
+using DonorFlow.Application.Queries.UserQueries.GetUserById;
+using DonorFlow.Application.Queries.UserQueries.GetUsersAll;
+using DonorFlow.Application.Commands.UserCommands.UpdateUser;
+using DonorFlow.Application.Commands.UserCommands.CreateUser;
+using DonorFlow.Application.Commands.UserCommands.DeleteUser;
+using DonorFlow.Application.Queries.UserQueries.GetUserByEmail;
 
 namespace DonorFlow.API.Controllers
 {

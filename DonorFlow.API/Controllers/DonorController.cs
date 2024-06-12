@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
-using DonorFlow.Application.Queries.GetDonorById;
-using DonorFlow.Application.Queries.GetDonorsAll;
-using DonorFlow.Application.Commands.Donor.UpdateDonor;
-using DonorFlow.Application.Commands.Donor.CreateDonor;
-using DonorFlow.Application.Commands.Donor.DeleteDonor;
+using DonorFlow.Application.Queries.DonorQueries.GetDonorById;
+using DonorFlow.Application.Queries.DonorQueries.GetDonorsAll;
+using DonorFlow.Application.Commands.DonorCommands.UpdateDonor;
+using DonorFlow.Application.Commands.DonorCommands.CreateDonor;
+using DonorFlow.Application.Commands.DonorCommands.DeleteDonor;
 
 namespace DonorFlow.API.Controllers
 {

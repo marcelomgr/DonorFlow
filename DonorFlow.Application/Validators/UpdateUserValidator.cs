@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using DonorFlow.Utilities;
 using DonorFlow.Core.Enums;
-using DonorFlow.Application.Commands.User.UpdateUser;
+using DonorFlow.Application.Commands.UserCommands.UpdateUser;
 
 namespace DonorFlow.Application.Validators
 {

@@ -3,7 +3,7 @@ using DonorFlow.Core.Repositories;
 using DonorFlow.Application.Models;
 using DonorFlow.Application.Queries.Models;
 
-namespace DonorFlow.Application.Queries.GetUserByEmail
+namespace DonorFlow.Application.Queries.UserQueries.GetUserByEmail
 {
     public class GetUserByEmailQueryHandler : IRequestHandler<GetUserByEmailQuery, BaseResult<GetUsersViewModel>>
     {

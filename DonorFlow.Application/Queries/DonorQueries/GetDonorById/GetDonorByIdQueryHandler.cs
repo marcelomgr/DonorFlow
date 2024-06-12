@@ -3,7 +3,7 @@ using DonorFlow.Core.Repositories;
 using DonorFlow.Application.Models;
 using DonorFlow.Application.Queries.Models;
 
-namespace DonorFlow.Application.Queries.GetDonorById
+namespace DonorFlow.Application.Queries.DonorQueries.GetDonorById
 {
     public class GetDonorByIdQueryHandler : IRequestHandler<GetDonorByIdQuery, BaseResult<GetDonorsViewModel>>
     {
