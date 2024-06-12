@@ -6,22 +6,22 @@ using DonorFlow.Application.Models;
 using Microsoft.IdentityModel.Tokens;
 using DonorFlow.Core.Integrations.ApiCepIntegration;
 
-namespace DonorFlow.Application.Commands.CreateUser
+namespace DonorFlow.Application.Commands.DonorCommands.CreateDonor
 {
-    public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, BaseResult<Guid>>
+    public class CreateDonorCommandHandler : IRequestHandler<CreateDonorCommand, BaseResult<Guid>>
     {
         private readonly IUnitOfWork _unitOfWork;
-        private readonly IValidator<CreateUserCommand> _validator;
+        private readonly IValidator<CreateDonorCommand> _validator;
         private readonly IApiCepService _apiCepService;
 
-        public CreateUserCommandHandler(IUnitOfWork unitOfWork, IValidator<CreateUserCommand> validator, IApiCepService apiCepService)
+        public CreateDonorCommandHandler(IUnitOfWork unitOfWork, IValidator<CreateDonorCommand> validator, IApiCepService apiCepService)
         {
             _unitOfWork = unitOfWork;
             _validator = validator;
             _apiCepService = apiCepService;
         }
 
-        public async Task<BaseResult<Guid>> Handle(CreateUserCommand request, CancellationToken cancellationToken)
+        public async Task<BaseResult<Guid>> Handle(CreateDonorCommand request, CancellationToken cancellationToken)
         {
             var validationResult = await _validator.ValidateAsync(request, cancellationToken);
 
@@ -31,12 +31,12 @@ namespace DonorFlow.Application.Commands.CreateUser
                 return new BaseResult<Guid>(Guid.Empty, false, errorMessages);
             }
 
-            var existingUser = await _unitOfWork.Users.GetByEmailAsync(request.Email.Trim());
+            var existingDonor = await _unitOfWork.Donors.GetByEmailAsync(request.Email.Trim());
 
-            if (existingUser is not null)
+            if (existingDonor is not null)
                 return new BaseResult<Guid>(Guid.Empty, false, "Email já cadastrado.");
 
-            var user = request.ToEntity();
+            var donor = request.ToEntity();
 
             if (request.CEP is not null && !request.CEP.IsNullOrEmpty())
             {
@@ -46,13 +46,13 @@ namespace DonorFlow.Application.Commands.CreateUser
                     return new BaseResult<Guid>(Guid.Empty, false, "CEP não encontrado.");
 
                 var location = new LocationInfo(resultCep.Cep, resultCep.Logradouro, resultCep.Bairro, resultCep.Localidade, resultCep.UF);
-                user.SetLocation(location);
+                donor.SetLocation(location);
             }
 
-            await _unitOfWork.Users.AddAsync(user);
+            await _unitOfWork.Donors.AddAsync(donor);
             await _unitOfWork.SaveChangesAsync();
 
-            return new BaseResult<Guid>(user.Id);
+            return new BaseResult<Guid>(donor.Id);
         }
     }
 }

@@ -4,7 +4,7 @@ using DonorFlow.Core.Repositories;
 using DonorFlow.Application.Models;
 using DonorFlow.Core.Services.AuthService;
 
-namespace DonorFlow.Application.Commands.AuthUser
+namespace DonorFlow.Application.Commands.UserCommands.AuthUser
 {
     public class AuthUserCommandHandler : IRequestHandler<AuthUserCommand, BaseResult<AuthViewModel>>
     {

@@ -2,10 +2,10 @@
 using FluentValidation;
 using DonorFlow.Application.Validators;
 using Microsoft.Extensions.DependencyInjection;
-using DonorFlow.Application.Commands.CreateUser;
-using DonorFlow.Application.Commands.UpdateUser;
-using DonorFlow.Application.Commands.CreateDonor;
-using DonorFlow.Application.Commands.UpdateDonor;
+using DonorFlow.Application.Commands.User.UpdateUser;
+using DonorFlow.Application.Commands.User.CreateUser;
+using DonorFlow.Application.Commands.Donor.UpdateDonor;
+using DonorFlow.Application.Commands.Donor.CreateDonor;
 
 namespace DonorFlow.Application
 {

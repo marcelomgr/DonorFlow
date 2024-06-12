@@ -6,7 +6,7 @@ using DonorFlow.Core.ValueObjects;
 using DonorFlow.Application.Models;
 using DonorFlow.Core.Integrations.ApiCepIntegration;
 
-namespace DonorFlow.Application.Commands.UpdateUser
+namespace DonorFlow.Application.Commands.UserCommands.UpdateUser
 {
     public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, BaseResult>
     {

@@ -1,5 +1,4 @@
-﻿
-namespace DonorFlow.Application.Models
+﻿namespace DonorFlow.Application.Commands.UserCommands.AuthUser
 {
     public class AuthViewModel
     {

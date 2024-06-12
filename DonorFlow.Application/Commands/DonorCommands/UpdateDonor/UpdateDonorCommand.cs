@@ -1,12 +1,12 @@
 ﻿using MediatR;
 using DonorFlow.Core.Enums;
-using DonorFlow.Core.Entities;
 using DonorFlow.Application.Models;
 
-namespace DonorFlow.Application.Commands.CreateDonor
+namespace DonorFlow.Application.Commands.DonorCommands.UpdateDonor
 {
-    public class CreateDonorCommand : IRequest<BaseResult<Guid>>
+    public class UpdateDonorCommand : IRequest<BaseResult>
     {
+        public Guid Id { get; set; }
         public string FullName { get; set; }
         public string Email { get; set; }
         public DateTime BirthDate { get; set; }
@@ -15,7 +15,5 @@ namespace DonorFlow.Application.Commands.CreateDonor
         public BloodType BloodType { get; set; }
         public RhFactor RhFactor { get; set; }
         public string CEP { get; set; }
-
-        public Donor ToEntity() => new(FullName, Email, BirthDate, Gender, Weight, BloodType, RhFactor);
     }
 }

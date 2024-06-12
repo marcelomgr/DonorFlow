@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using DonorFlow.Application.Commands.UpdateDonor;
+using DonorFlow.Application.Commands.Donor.UpdateDonor;
 
 namespace DonorFlow.Application.Validators
 {

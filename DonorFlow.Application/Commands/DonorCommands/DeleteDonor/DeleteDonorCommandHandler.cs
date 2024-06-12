@@ -2,7 +2,7 @@
 using DonorFlow.Core.Repositories;
 using DonorFlow.Application.Models;
 
-namespace DonorFlow.Application.Commands.DeleteDonor
+namespace DonorFlow.Application.Commands.DonorCommands.DeleteDonor
 {
     public class DeleteDonorCommandHandler : IRequestHandler<DeleteDonorCommand, BaseResult>
     {
