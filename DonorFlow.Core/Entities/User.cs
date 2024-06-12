@@ -21,17 +21,13 @@ namespace DonorFlow.Core.Entities
         public UserRole Role { get; private set; }
         public LocationInfo? Location { get; private set; }
 
-        public User(string fullName, string cpf, string password, string email, DateTime birthDate, Gender gender, string role)
+        public User(string fullName, string cpf, string password, string email, DateTime birthDate, Gender gender, UserRole role)
             : base(fullName, email, birthDate, gender)
         {
             CPF = NormalizeCPF(cpf);
             Password = HashPassword(password);
             Status = UserStatus.Active;
-
-            if (Enum.TryParse<UserRole>(role, out UserRole parsedRole))
-                Role = parsedRole;
-            else
-                Role = UserRole.Basic;
+            Role = role;
         }
 
         public void Update(string fullName, string cpf, string email, string password, DateTime birthDate, Gender gender, UserRole role, LocationInfo location)

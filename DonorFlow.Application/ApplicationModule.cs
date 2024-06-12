@@ -1,10 +1,11 @@
 ﻿using MediatR;
 using FluentValidation;
 using DonorFlow.Application.Validators;
+using Microsoft.Extensions.DependencyInjection;
 using DonorFlow.Application.Commands.CreateUser;
 using DonorFlow.Application.Commands.UpdateUser;
 using DonorFlow.Application.Commands.CreateDonor;
-using Microsoft.Extensions.DependencyInjection;
+using DonorFlow.Application.Commands.UpdateDonor;
 
 namespace DonorFlow.Application
 {
@@ -31,6 +32,7 @@ namespace DonorFlow.Application
             services.AddTransient<IValidator<CreateUserCommand>, CreateUserValidator>();
             services.AddTransient<IValidator<UpdateUserCommand>, UpdateUserValidator>();
             services.AddTransient<IValidator<CreateDonorCommand>, CreateDonorValidator>();
+            services.AddTransient<IValidator<UpdateDonorCommand>, UpdateDonorValidator>();
 
             return services;
         }

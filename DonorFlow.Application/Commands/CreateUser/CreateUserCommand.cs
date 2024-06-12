@@ -13,7 +13,7 @@ namespace DonorFlow.Application.Commands.CreateUser
         public string Email { get; set; }
         public DateTime BirthDate { get; set; }
         public Gender Gender { get; set; }
-        public string Role { get; set; }
+        public UserRole Role { get; set; }
         public string CEP { get; set; }
 
         public User ToEntity() => new(FullName, CPF, Password, Email, BirthDate, Gender, Role);

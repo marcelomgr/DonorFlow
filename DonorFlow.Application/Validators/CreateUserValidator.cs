@@ -31,11 +31,6 @@ namespace DonorFlow.Application.Validators
                     }
                 });
 
-            RuleFor(x => x.Role)
-                .NotEmpty()
-                .Must(role => Enum.TryParse<UserRole>(role, out _))
-                .WithMessage("Role inválida.");
-
             RuleFor(x => x.BirthDate)
             .NotEmpty()
             .Must(BeAnAdult)
