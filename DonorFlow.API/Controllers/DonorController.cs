@@ -21,7 +21,6 @@ namespace DonorFlow.API.Controllers
         }
 
         [HttpPost]
-        [AllowAnonymous]
         public async Task<IActionResult> Post(CreateDonorCommand command)
         {
             var result = await _mediator.Send(command);

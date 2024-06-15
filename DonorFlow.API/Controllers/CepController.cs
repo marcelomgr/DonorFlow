@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 using DonorFlow.Core.Integrations.ApiCepIntegration;
 
 namespace DonorFlow.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Authorize]
+    [Route("api/cep")]
     [ApiController]
     public class CepController : ControllerBase
     {
