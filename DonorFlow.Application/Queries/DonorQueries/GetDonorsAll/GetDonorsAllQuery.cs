@@ -4,8 +4,8 @@ using DonorFlow.Application.Queries.Models;
 
 namespace DonorFlow.Application.Queries.DonorQueries.GetDonorsAll
 {
-    public class GetAllDonorsQuery : IRequest<BaseResult<List<GetDonorsViewModel>>>
+    public class GetDonorsAllQuery : IRequest<BaseResult<List<GetDonorsViewModel>>>
     {
-        public GetAllDonorsQuery() { }
+        public GetDonorsAllQuery() { }
     }
 }

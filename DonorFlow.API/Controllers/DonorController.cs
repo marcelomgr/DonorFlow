@@ -31,7 +31,7 @@ namespace DonorFlow.API.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var query = new GetAllDonorsQuery();
+            var query = new GetDonorsAllQuery();
             var result = await _mediator.Send(query);
 
             return result.Success ? Ok(result) : NotFound(result.Message);

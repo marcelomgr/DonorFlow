@@ -9,7 +9,7 @@ namespace DonorFlow.Infrastructure.Persistence
 
         public DbSet<User> Users { get; set; }
         public DbSet<Donor> Donors { get; set; }
-
+        public DbSet<BloodStock> BloodStocks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -63,6 +63,18 @@ namespace DonorFlow.Infrastructure.Persistence
                     loc.Property(l => l.State).HasColumnName("State");
                 });
             });
+
+            builder.Entity<BloodStock>(e =>
+            {
+                e.HasKey(d => d.Id);
+                e.Property(d => d.BloodType).IsRequired();
+                e.Property(d => d.RhFactor).IsRequired();
+                e.Property(d => d.QuantityML).IsRequired();
+
+                // Configurar chave composta
+                e.HasIndex(b => new { b.BloodType, b.RhFactor }).IsUnique();
+            });
+
 
             base.OnModelCreating(builder);
         }

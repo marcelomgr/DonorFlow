@@ -39,6 +39,7 @@ namespace DonorFlow.Infrastructure
             services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IDonorRepository, DonorRepository>();
+            services.AddScoped<IBloodStockRepository, BloodStockRepository>();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             return services;

@@ -5,8 +5,8 @@ using DonorFlow.Core.Integrations.ApiCepIntegration;
 namespace DonorFlow.API.Controllers
 {
     [Authorize]
-    [Route("api/cep")]
     [ApiController]
+    [Route("api/cep")]
     public class CepController : ControllerBase
     {
         private readonly IApiCepService _apiCepService;

@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using DonorFlow.Application.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace DonorFlow.API.Controllers
 {
-    [Route("api/enums")]
+    [Authorize]
     [ApiController]
+    [Route("api/enums")]
     public class EnumsController : ControllerBase
     {
         private readonly IEnumService _enumService;
