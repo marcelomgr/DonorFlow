@@ -1,6 +1,5 @@
 ﻿using FluentValidation;
 using DonorFlow.Utilities;
-using DonorFlow.Core.Enums;
 using DonorFlow.Application.Commands.UserCommands.UpdateUser;
 
 namespace DonorFlow.Application.Validators
@@ -11,15 +10,15 @@ namespace DonorFlow.Application.Validators
         {
             RuleFor(x => x.FullName)
                 .NotEmpty()
-                .MinimumLength(2);
+                .MinimumLength(2).WithMessage("O nome completo deve ser informado.");
 
             RuleFor(x => x.Email)
                 .NotEmpty()
-                .EmailAddress();
+                .EmailAddress().WithMessage("O E-mail informado é inválido.");
 
             RuleFor(x => x.CEP)
                 .NotEmpty()
-                .MinimumLength(8);
+                .Matches(@"^\d{5}-\d{3}$").WithMessage("O CEP está em um formato inválido. Formadto esperado: 00000-000");
 
             RuleFor(x => x.CPF)
                 .NotEmpty()
@@ -27,19 +26,21 @@ namespace DonorFlow.Application.Validators
                 {
                     if (!Utils.IsCpfValid(cpf))
                     {
-                        context.AddFailure("CPF", "CPF inválido.");
+                        context.AddFailure("CPF", "O CPF informado é inválido.");
                     }
                 });
 
+            RuleFor(x => x.Gender)
+                .IsInEnum().WithMessage("O Gênero informado é inválido.");
+
             RuleFor(x => x.Role)
-                .NotEmpty()
-                .Must(role => Enum.TryParse<UserRole>(role, out _))
-                .WithMessage("Role inválida.");
+                .IsInEnum().WithMessage("A permissão informada é inválida.");
 
             RuleFor(x => x.BirthDate)
             .NotEmpty()
             .Must(BeAnAdult)
-            .WithMessage("Usuário deve ser maior de idade.");
+            .WithMessage("Usuário deve ser maior de idade.")
+            .LessThan(DateTime.Today).WithMessage("A data de nascimento não pode ser maior que a data atual.");
         }
 
         private bool BeAnAdult(DateTime birthDate)

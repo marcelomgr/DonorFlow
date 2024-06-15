@@ -10,15 +10,15 @@ namespace DonorFlow.Application.Validators
         {
             RuleFor(x => x.FullName)
                 .NotEmpty()
-                .MinimumLength(2);
+                .MinimumLength(2).WithMessage("O nome completo deve ser informado.");
 
             RuleFor(x => x.Password)
                 .NotEmpty()
-                .MinimumLength(5);
+                .MinimumLength(5).WithMessage("A senha deve ser informada.");
 
             RuleFor(x => x.Email)
                 .NotEmpty()
-                .EmailAddress();
+                .EmailAddress().WithMessage("O E-mail informado é inválido.");
 
             RuleFor(x => x.CPF)
                 .NotEmpty()
@@ -26,14 +26,15 @@ namespace DonorFlow.Application.Validators
                 {
                     if (!Utils.IsCpfValid(cpf))
                     {
-                        context.AddFailure("CPF", "CPF inválido.");
+                        context.AddFailure("CPF", "O CPF informado é inválido.");
                     }
                 });
 
             RuleFor(x => x.BirthDate)
             .NotEmpty()
             .Must(BeAnAdult)
-            .WithMessage("Usuário deve ser maior de idade.");
+            .WithMessage("Usuário deve ser maior de idade.")
+            .LessThan(DateTime.Today).WithMessage("A data de nascimento não pode ser maior que a data atual.");
         }
 
         private bool BeAnAdult(DateTime birthDate)

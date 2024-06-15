@@ -5,10 +5,10 @@ namespace DonorFlow.Core.Enums
     public enum UserStatus
     {
         [DescriptionAttribute("Inativo")]
-        Inactive = 0,
+        Inactive,
         [DescriptionAttribute("Ativo")]
-        Active = 1,
+        Active,
         [DescriptionAttribute("Bloqueado")]
-        Blocked = 2
+        Blocked
     }
 }

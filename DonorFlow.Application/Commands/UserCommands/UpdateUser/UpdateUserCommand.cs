@@ -13,6 +13,6 @@ namespace DonorFlow.Application.Commands.UserCommands.UpdateUser
         public DateTime BirthDate { get; set; }
         public Gender Gender { get; set; }
         public string CEP { get; set; }
-        public string Role { get; set; }
+        public UserRole Role { get; set; }
     }
 }
