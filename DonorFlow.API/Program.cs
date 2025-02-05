@@ -1,9 +1,11 @@
-using Microsoft.OpenApi.Models;
+using System.Text;
 using DonorFlow.Application;
 using DonorFlow.Infrastructure;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.OpenApi.Models;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using System.Text;
+using DonorFlow.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -78,6 +80,13 @@ var app = builder.Build();
     app.UseSwagger();
     app.UseSwaggerUI();
 //}
+
+#region CreateDbScope
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<DonorDbContext>();
+    dbContext.Database.Migrate();
+#endregion
 
 app.UseHttpsRedirection();
 
