@@ -24,7 +24,7 @@ namespace DonorFlow.Application.Validators
                 .NotEmpty()
                 .Custom((cpf, context) =>
                 {
-                    if (!Utils.IsCpfValid(cpf))
+                    if (!cpf.IsCpfValid())
                     {
                         context.AddFailure("CPF", "O CPF informado é inválido.");
                     }

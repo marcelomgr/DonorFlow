@@ -29,5 +29,12 @@ namespace DonorFlow.API.Controllers
             var enums = _enumService.GetDonorEnums();
             return Ok(enums);
         }
+
+        [HttpGet("person")]
+        public IActionResult GetPersonEnums()
+        {
+            var enums = _enumService.GetPersonEnums();
+            return Ok(enums);
+        }
     }
 }

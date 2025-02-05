@@ -6,4 +6,5 @@ public interface IEnumService
 {
     IDictionary<string, List<EnumValue>> GetUserEnums();
     IDictionary<string, List<EnumValue>> GetDonorEnums();
+    IDictionary<string, List<EnumValue>> GetPersonEnums();
 }

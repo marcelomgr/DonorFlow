@@ -64,7 +64,7 @@ public class EnumService : IEnumService
         return combinedDict;
     }
 
-    private IDictionary<string, List<EnumValue>> GetPersonEnums()
+    public IDictionary<string, List<EnumValue>> GetPersonEnums()
     {
         return new Dictionary<string, List<EnumValue>>
             {
@@ -81,7 +81,7 @@ public class EnumService : IEnumService
                 { nameof(RhFactor), GetEnumValues<RhFactor>() }
             };
 
-        return CombineDictionaries(personEnums, donorSpecificEnums);
+        return CombineDictionaries(donorSpecificEnums);
     }
 
     public IDictionary<string, List<EnumValue>> GetUserEnums()
@@ -93,6 +93,6 @@ public class EnumService : IEnumService
                 { nameof(UserRole), GetEnumValues<UserRole>() }
             };
 
-        return CombineDictionaries(personEnums, userSpecificEnums);
+        return CombineDictionaries(userSpecificEnums);
     }
 }

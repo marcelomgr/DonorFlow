@@ -2,7 +2,7 @@
 {
     public static class Utils
     {
-        public static bool IsCpfValid(string cpf)
+        public static bool IsCpfValid(this string cpf)
         {
             cpf = new string(cpf.Where(char.IsDigit).ToArray());
 
