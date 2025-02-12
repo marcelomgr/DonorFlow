@@ -9,6 +9,7 @@ namespace DonorFlow.Infrastructure.Persistence
 
         public DbSet<User> Users { get; set; }
         public DbSet<Donor> Donors { get; set; }
+        public DbSet<Donation> Donations { get; set; }
         public DbSet<BloodStock> BloodStocks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -75,6 +76,19 @@ namespace DonorFlow.Infrastructure.Persistence
                 e.HasIndex(b => new { b.BloodType, b.RhFactor }).IsUnique();
             });
 
+            builder.Entity<Donation>(e =>
+            {
+                e.HasKey(d => d.Id);
+
+                e.Property(d => d.QuantityML)
+                    .IsRequired()
+                    .HasDefaultValue(0);
+
+                e.HasOne(d => d.Donor)
+                    .WithMany()
+                    .HasForeignKey(d => d.DonorId)
+                    .OnDelete(DeleteBehavior.Restrict);
+            });
 
             base.OnModelCreating(builder);
         }

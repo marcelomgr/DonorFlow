@@ -8,16 +8,19 @@ namespace DonorFlow.Infrastructure.Persistence.Repositories
 
         public UnitOfWork(DonorDbContext context,
             IUserRepository userRepository,
-            IDonorRepository donorRepository
+            IDonorRepository donorRepository,
+            IDonationRepository donationRepository
             )
         {
             _context = context;
             Users = userRepository;
             Donors = donorRepository;
+            Donations = donationRepository;
         }
 
         public IUserRepository Users { get; }
         public IDonorRepository Donors { get; }
+        public IDonationRepository Donations { get; }
 
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {

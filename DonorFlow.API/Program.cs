@@ -86,14 +86,15 @@ using (var scope = app.Services.CreateScope())
 {
     var dbContext = scope.ServiceProvider.GetRequiredService<DonorDbContext>();
     dbContext.Database.Migrate();
-#endregion
+    #endregion
 
-app.UseHttpsRedirection();
+    app.UseHttpsRedirection();
 
-app.UseAuthentication();
+    app.UseAuthentication();
 
-app.UseAuthorization();
+    app.UseAuthorization();
 
-app.MapControllers();
+    app.MapControllers();
 
-app.Run();
+    app.Run();
+}
