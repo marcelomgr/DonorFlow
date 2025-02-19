@@ -4,6 +4,7 @@
     {
         IUserRepository Users { get; }
         IDonorRepository Donors { get; }
+        IDonationRepository Donations { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }

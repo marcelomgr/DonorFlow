@@ -8,6 +8,7 @@ using DonorFlow.Application.Commands.UserCommands.UpdateUser;
 using DonorFlow.Application.Commands.UserCommands.CreateUser;
 using DonorFlow.Application.Commands.DonorCommands.CreateDonor;
 using DonorFlow.Application.Commands.DonorCommands.UpdateDonor;
+using DonorFlow.Application.Commands.DonationCommands.CreateDonation;
 
 namespace DonorFlow.Application
 {
@@ -36,6 +37,7 @@ namespace DonorFlow.Application
             services.AddTransient<IValidator<UpdateUserCommand>, UpdateUserValidator>();
             services.AddTransient<IValidator<CreateDonorCommand>, CreateDonorValidator>();
             services.AddTransient<IValidator<UpdateDonorCommand>, UpdateDonorValidator>();
+            services.AddTransient<IValidator<CreateDonationCommand>, CreateDonationValidator>();
             return services;
         }
     }

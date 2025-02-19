@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using DonorFlow.Application.Queries.DonationQueries.GetDonationsAll;
 using DonorFlow.Application.Queries.DonationQueries.GetDonationById;
+using DonorFlow.Application.Commands.DonationCommands.CreateDonation;
 
 namespace DonorFlow.API.Controllers
 {
@@ -15,6 +16,14 @@ namespace DonorFlow.API.Controllers
         public DonationController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(CreateDonationCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            return result.Success ? Ok(result) : BadRequest(result.Message);
         }
 
         [HttpGet]
