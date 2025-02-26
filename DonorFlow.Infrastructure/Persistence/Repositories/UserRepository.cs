@@ -30,6 +30,7 @@ namespace DonorFlow.Infrastructure.Persistence.Repositories
             if (user is not null)
             {
                 user.Delete();
+                user.Inactive();
                 await _context.SaveChangesAsync();
             }
         }

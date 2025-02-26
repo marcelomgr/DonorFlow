@@ -57,6 +57,11 @@ namespace DonorFlow.Core.Entities
             return cpf.Trim().Replace(".", "").Replace("-", "");
         }
 
+        public void Inactive()
+        {
+            Status = UserStatus.Inactive;
+        }
+
         public static string HashPassword(string password)
         {
             using (SHA256 sha256 = SHA256.Create())

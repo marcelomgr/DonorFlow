@@ -23,7 +23,7 @@ namespace DonorFlow.Application.Validators
                 .IsInEnum().WithMessage("O Gênero informado é inválido.");
 
             RuleFor(x => x.Weight)
-                .GreaterThan(50).WithMessage("O peso mínimo deve ser de 50KG.");
+                .GreaterThan(49).WithMessage("O peso mínimo deve ser de 50KG.");
 
             RuleFor(x => x.BloodType)
                 .IsInEnum().WithMessage("O Tipo Sanguíneo informado é inválido.");
@@ -33,7 +33,7 @@ namespace DonorFlow.Application.Validators
 
             RuleFor(x => x.CEP)
                 .NotEmpty()
-                .Matches(@"^\d{5}-\d{3}$").WithMessage("O CEP está em um formato inválido. Formadto esperado: 00000-000");
+                .Matches(@"^\d{5}-\d{3}$").WithMessage("O CEP está em um formato inválido. Formato esperado: 00000-000");
         }
     }
 }
