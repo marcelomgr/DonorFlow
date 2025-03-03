@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using DonorFlow.Application.Queries.DonationQueries.GetDonationsAll;
 using DonorFlow.Application.Queries.DonationQueries.GetDonationById;
 using DonorFlow.Application.Commands.DonationCommands.CreateDonation;
+using DonorFlow.Application.Queries.DonationQueries.GetDonationsByDonorId;
 
 namespace DonorFlow.API.Controllers
 {
@@ -39,6 +40,15 @@ namespace DonorFlow.API.Controllers
         public async Task<IActionResult> GetById(Guid id)
         {
             var query = new GetDonationByIdQuery(id);
+            var result = await _mediator.Send(query);
+
+            return result.Success ? Ok(result) : NotFound(result.Message);
+        }
+
+        [HttpGet("donors/{id}")]
+        public async Task<IActionResult> GetByDonorId(Guid id)
+        {
+            var query = new GetDonationsByDonorIdQuery(id);
             var result = await _mediator.Send(query);
 
             return result.Success ? Ok(result) : NotFound(result.Message);

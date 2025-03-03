@@ -3,18 +3,19 @@ using DonorFlow.Core.Repositories;
 using DonorFlow.Application.Models;
 using DonorFlow.Application.Queries.Models;
 
-namespace DonorFlow.Application.Queries.DonationQueries.GetDonationsAll
+namespace DonorFlow.Application.Queries.DonationQueries.GetDonationsByDonorId
 {
-    public class GetDonationsAllQueryHandler : IRequestHandler<GetDonationsAllQuery, BaseResult<List<GetDonationsViewModel>>>
+    public class GetDonationsByDonorIdQueryHandler : IRequestHandler<GetDonationsByDonorIdQuery, BaseResult<List<GetDonationsViewModel>>>
     {
         private readonly IDonationRepository _repository;
-        public GetDonationsAllQueryHandler(IDonationRepository repository)
+        public GetDonationsByDonorIdQueryHandler(IDonationRepository repository)
         {
             _repository = repository;
         }
-        public async Task<BaseResult<List<GetDonationsViewModel>>> Handle(GetDonationsAllQuery request, CancellationToken cancellationToken)
+
+        public async Task<BaseResult<List<GetDonationsViewModel>>> Handle(GetDonationsByDonorIdQuery request, CancellationToken cancellationToken)
         {
-            var donations = await _repository.GetAllAsync();
+            var donations = await _repository.GetByDonor(request.Id);
 
             if (donations is null)
             {
