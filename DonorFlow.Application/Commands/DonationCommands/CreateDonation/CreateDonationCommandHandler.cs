@@ -2,6 +2,7 @@
 using FluentValidation;
 using DonorFlow.Application.Models;
 using DonorFlow.Core.Repositories;
+using DonorFlow.Core.Entities;
 
 namespace DonorFlow.Application.Commands.DonationCommands.CreateDonation
 {
@@ -34,8 +35,11 @@ namespace DonorFlow.Application.Commands.DonationCommands.CreateDonation
                 return new BaseResult<Guid>(Guid.Empty, false, "Doador não encontrado.");
 
             var donation = request.ToEntity(donor);
-
             await _unitOfWork.Donations.AddAsync(donation);
+
+            var stock = new BloodStock(donor.BloodType, donor.RhFactor, donation.QuantityML);
+            await _unitOfWork.BloodStocks.AddOrUpdateAsync(stock);
+
             await _unitOfWork.SaveChangesAsync();
 
             return new BaseResult<Guid>(donation.Id);
