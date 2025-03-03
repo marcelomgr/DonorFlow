@@ -34,6 +34,18 @@ namespace DonorFlow.Application.Commands.DonationCommands.CreateDonation
             if (donor is null)
                 return new BaseResult<Guid>(Guid.Empty, false, "Doador não encontrado.");
 
+            if (!donor.IsDonorAdult())
+                return new BaseResult<Guid>(Guid.Empty, false, "Doador deve ser maior de idade para doar.");
+
+            var donationsByDonor = await _unitOfWork.Donations.GetByDonor(request.DonorId);
+
+            if (donationsByDonor is not null)
+            {
+                var lastDonation = donationsByDonor.OrderByDescending(d => d.CreatedAt).First();
+                if (lastDonation.IsLastDonationSufficientOld(donor.Gender))
+                    return new BaseResult<Guid>(Guid.Empty, false, "Não houve tempo o suficiente desde a última doação.");
+            }
+
             var donation = request.ToEntity(donor);
             await _unitOfWork.Donations.AddAsync(donation);
 

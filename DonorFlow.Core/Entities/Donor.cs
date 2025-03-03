@@ -34,5 +34,10 @@ namespace DonorFlow.Core.Entities
 
             UpdatePerson(fullName, email, birthDate, gender);
         }
+
+        public bool IsDonorAdult()
+        {
+            return BirthDate <= DateTime.Today.AddYears(-18);
+        }
     }
 }
